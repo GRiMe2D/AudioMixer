@@ -10,7 +10,7 @@ package audiomixer.utils
 		var packet:AudioPacket = new AudioPacket();
 		var signal:AudioSignal;
 		
-		for each ($packet in packet) {
+		for each ($packet in audioPackets) {
 			for (i = 0; i < AudioMixer.SOUND_LOOP_NUMBER; i++) {
 				signal = packet.get(i);
 				signal.l += $packet.get(i).l;
