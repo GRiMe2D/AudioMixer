@@ -5,15 +5,17 @@ package audiomixer.core
 	{
 		
 		protected var m_nextslot:IAudioInput;
+		protected var m_effects:Vector.<IAudioInput>;
 		
 		
 		public function MixerSlot()
 		{
-			
+			m_effects = new Vector.<IAudioInput>;
+			m_effects.push(new Effect());
 		}
 		
 		public function set nextslot(to:IAudioInput):void {
-			m_nextslot = nextslot;
+			m_nextslot = to;
 		}
 		
 		public function get nextslot():IAudioInput {
@@ -27,7 +29,10 @@ package audiomixer.core
 		}
 		
 		protected function workOn(packet:AudioPacket):void {
-			
+			var effect:IAudioInput;
+			for each (effect in m_effects) {
+				effect.input(packet);
+			}
 		}
 		
 		protected function out(packet:AudioPacket):void {

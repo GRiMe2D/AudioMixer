@@ -8,7 +8,7 @@ package audiomixer.core
 		protected var m_r:Number;
 		protected var m_l:Number;
 		
-		public function AudioSignal(r:Number = 0, l:Number = 0)
+		public function AudioSignal(l:Number = 0, r:Number = 0)
 		{
 			m_r = r;
 			m_l = l;

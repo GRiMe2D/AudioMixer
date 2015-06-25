@@ -28,5 +28,9 @@ package audiomixer.core
 			index %= AudioMixer.SOUND_LOOP_NUMBER;
 			return packet[index];
 		}
+		
+		public function set(index:int, signal:AudioSignal):void {
+			packet[index] = signal;
+		}
 	}
 }

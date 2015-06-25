@@ -8,6 +8,7 @@
     <classEntry path="audiomixer.utils.deg2rad"/>
     <classEntry path="audiomixer.core.MixerSlot"/>
     <classEntry path="audiomixer.core.AudioPacket"/>
+    <classEntry path="audiomixer.core.Effect"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

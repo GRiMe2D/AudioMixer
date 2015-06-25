@@ -61,9 +61,19 @@ package audiomixer.core
 		
 		private function onSampleData(e:SampleDataEvent):void {
 			var slot:MixerSlot;
+			var i:int;
+			
 			for each (slot in slots) {
 				slot.input(new AudioPacket());
 			}
+			
+			bytes.position = 0;
+			for (i = 0; i < AudioMixer.SOUND_LOOP_NUMBER; i++) {
+				e.data.writeFloat(bytes.readFloat());
+				e.data.writeFloat(bytes.readFloat());
+			}
+			
+			
 		}
 	}
 }
