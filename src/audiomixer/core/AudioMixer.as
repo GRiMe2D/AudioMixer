@@ -1,5 +1,6 @@
 package audiomixer.core
 {
+	import flash.events.SampleDataEvent;
 	import flash.media.Sound;
 	import flash.utils.ByteArray;
 	import flash.utils.Timer;
@@ -21,11 +22,27 @@ package audiomixer.core
 			
 			slots = new Vector.<MixerSlot>;
 			
+			m_master = new MixerSlot();
+			m_master.nextslot = this;
+			this.add(m_master);
 			
+			
+			bytes = new ByteArray();
+			for (i = 0; i < AudioMixer.SOUND_LOOP_NUMBER; i++) {
+				bytes.writeFloat(0);
+				bytes.writeFloat(0);
+			}
+			
+			sound = new Sound();
+			sound.addEventListener(SampleDataEvent.SAMPLE_DATA, onSampleData);
+			sound.play();
 			
 		}
 		
 		public function add(mixerSlot:MixerSlot):int {
+			if (!mixerSlot.nextslot) {
+				mixerSlot.nextslot = m_master;
+			}
 			return slots.push(mixerSlot) - 1;
 		}
 		
@@ -39,6 +56,13 @@ package audiomixer.core
 				signal = packet.get(i);
 				bytes.writeFloat(signal.l);
 				bytes.writeFloat(signal.r);
+			}
+		}
+		
+		private function onSampleData(e:SampleDataEvent):void {
+			var slot:MixerSlot;
+			for each (slot in slots) {
+				slot.input(new AudioPacket());
 			}
 		}
 	}
