@@ -9,6 +9,9 @@
     <classEntry path="audiomixer.core.MixerSlot"/>
     <classEntry path="audiomixer.core.AudioPacket"/>
     <classEntry path="audiomixer.core.Effect"/>
+    <classEntry path="generators.WhiteNoise"/>
+    <classEntry path="errors.AbstractClassError"/>
+    <classEntry path="errors.AbstractMethodError"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

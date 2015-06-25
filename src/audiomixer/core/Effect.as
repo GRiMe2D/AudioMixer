@@ -1,16 +1,21 @@
 package audiomixer.core
 {
+	import flash.utils.getQualifiedClassName;
+	
+	import errors.AbstractClassError;
+	import errors.AbstractMethodError;
+
 	public class Effect implements IAudioInput
 	{
 		public function Effect()
 		{
+			if (getQualifiedClassName(this) == "audiomixer.core::Effect") {
+				throw new AbstractClassError();
+			}
 		}
 		
 		public function input(packet:AudioPacket):void {
-			var i:int;
-			for (i = 0; i < AudioMixer.SOUND_LOOP_NUMBER; i++) {
-				packet.set(i, new AudioSignal(Math.random()));
-			}
+			throw new AbstractMethodError();
 		}
 	}
 }

@@ -1,5 +1,6 @@
 package audiomixer.core
 {
+	import generators.WhiteNoise;
 	
 	public class MixerSlot implements IAudioInput
 	{
@@ -11,7 +12,7 @@ package audiomixer.core
 		public function MixerSlot()
 		{
 			m_effects = new Vector.<IAudioInput>;
-			m_effects.push(new Effect());
+			m_effects.push(new WhiteNoise());
 		}
 		
 		public function set nextslot(to:IAudioInput):void {
