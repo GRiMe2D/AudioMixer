@@ -12,6 +12,10 @@
     <classEntry path="generators.WhiteNoise"/>
     <classEntry path="errors.AbstractClassError"/>
     <classEntry path="errors.AbstractMethodError"/>
+    <classEntry path="audiomixer.utils.log10"/>
+    <classEntry path="audiomixer.utils.db2amp"/>
+    <classEntry path="audiomixer.utils.amp2db"/>
+    <classEntry path="audiomixer.core.SignalVolume"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

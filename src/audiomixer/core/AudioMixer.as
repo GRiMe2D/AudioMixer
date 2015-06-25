@@ -8,7 +8,7 @@ package audiomixer.core
 	public class AudioMixer implements IAudioInput
 	{
 		
-		public static const SOUND_LOOP_NUMBER:int = 2048;
+		public static const SOUND_LOOP_NUMBER:int = 4096;
 		
 		private var slots:Vector.<MixerSlot>;
 		private var bytes:ByteArray;
@@ -24,6 +24,9 @@ package audiomixer.core
 			
 			m_master = new MixerSlot();
 			m_master.nextslot = this;
+			
+			m_master.preVolume.db = 0;
+			m_master.postVolume.db = -6;
 			this.add(m_master);
 			
 			
