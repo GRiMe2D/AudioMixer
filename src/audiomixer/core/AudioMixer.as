@@ -70,6 +70,10 @@ package audiomixer.core
 			packet = mergeAudioPackets(packets);
 			for (i = 0; i < AudioMixer.SOUND_LOOP_NUMBER; i++) {
 				signal = packet.get(i);
+				
+				signal.r = Math.max(-1, Math.min(1, signal.r));
+				signal.l = Math.max(-1, Math.min(1, signal.l));
+				
 				e.data.writeFloat(signal.l);
 				e.data.writeFloat(signal.r);
 			}
