@@ -1,12 +1,7 @@
 package audiomixer.core
 {
-	import audiomixer.utils.amp2db;
-	import audiomixer.utils.db2amp;
-	import audiomixer.utils.log10;
-	
-	import generators.WhiteNoise;
-	
-	public class MixerSlot implements IAudioInput
+
+	public class MixerChannel implements IAudioInput
 	{
 		
 		protected var m_nextslot:IAudioInput;
@@ -14,10 +9,9 @@ package audiomixer.core
 		protected var m_preVolume:SignalVolume;
 		protected var m_postVolume:SignalVolume;
 		
-		public function MixerSlot()
+		public function MixerChannel()
 		{
 			m_effects = new Vector.<IAudioInput>;
-			m_effects.push(new WhiteNoise());
 			
 			m_preVolume = new SignalVolume();
 			m_postVolume = new SignalVolume();

@@ -6,7 +6,7 @@
     <classEntry path="audiomixer.core.AudioSignal"/>
     <classEntry path="audiomixer.utils.rad2deg"/>
     <classEntry path="audiomixer.utils.deg2rad"/>
-    <classEntry path="audiomixer.core.MixerSlot"/>
+    <classEntry path="audiomixer.core.MixerChannel"/>
     <classEntry path="audiomixer.core.AudioPacket"/>
     <classEntry path="audiomixer.core.Effect"/>
     <classEntry path="generators.WhiteNoise"/>

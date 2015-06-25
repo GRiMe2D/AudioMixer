@@ -10,19 +10,19 @@ package audiomixer.core
 		
 		public static const SOUND_LOOP_NUMBER:int = 4096;
 		
-		private var slots:Vector.<MixerSlot>;
+		private var slots:Vector.<MixerChannel>;
 		private var bytes:ByteArray;
 		private var timer:Timer;
-		private var m_master:MixerSlot;
+		private var m_master:MixerChannel;
 		private var sound:Sound;
 		
 		public function AudioMixer()
 		{
 			var i:int;
 			
-			slots = new Vector.<MixerSlot>;
+			slots = new Vector.<MixerChannel>;
 			
-			m_master = new MixerSlot();
+			m_master = new MixerChannel();
 			m_master.nextslot = this;
 			
 			m_master.preVolume.db = 0;
@@ -42,7 +42,11 @@ package audiomixer.core
 			
 		}
 		
-		public function add(mixerSlot:MixerSlot):int {
+		public function get masterChannel():MixerChannel {
+			return m_master;
+		}
+		
+		public function add(mixerSlot:MixerChannel):int {
 			if (!mixerSlot.nextslot) {
 				mixerSlot.nextslot = m_master;
 			}
@@ -63,7 +67,7 @@ package audiomixer.core
 		}
 		
 		private function onSampleData(e:SampleDataEvent):void {
-			var slot:MixerSlot;
+			var slot:MixerChannel;
 			var i:int;
 			
 			for each (slot in slots) {
