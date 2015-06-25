@@ -10,7 +10,7 @@ package audiomixer.core
 	public class AudioMixer implements IAudioInput
 	{
 		
-		public static const SOUND_LOOP_NUMBER:int = 4096;
+		public static const SOUND_LOOP_NUMBER:int = 2048;
 		
 		private var m_channels:Vector.<MixerChannel>;
 		private var bytes:ByteArray;

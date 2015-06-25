@@ -3,10 +3,10 @@ package generators
 	import audiomixer.core.AudioMixer;
 	import audiomixer.core.AudioPacket;
 	import audiomixer.core.AudioSignal;
-	import audiomixer.core.Effect;
+	import audiomixer.core.AudioPlugin;
 	import audiomixer.core.SignalVolume;
 	
-	public class WhiteNoise extends Effect
+	public class WhiteNoise extends AudioPlugin
 	{
 		
 		private static const NAME:String = "White Noise Generator";

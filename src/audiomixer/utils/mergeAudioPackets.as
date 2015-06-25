@@ -18,11 +18,11 @@ package audiomixer.utils
 			}
 		}
 		
-		for (i = 0; i < AudioMixer.SOUND_LOOP_NUMBER; i++) {
+		/* for (i = 0; i < AudioMixer.SOUND_LOOP_NUMBER; i++) {
 			signal = packet.get(i);
 			signal.r /= audioPackets.length;
 			signal.l /= audioPackets.length;
-		}
+		}*/
 		
 		return packet;
 	}

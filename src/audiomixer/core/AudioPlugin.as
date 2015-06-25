@@ -5,12 +5,12 @@ package audiomixer.core
 	import errors.AbstractClassError;
 	import errors.AbstractMethodError;
 
-	public class Effect implements IAudioInput
+	public class AudioPlugin implements IAudioInput
 	{
 		
-		public function Effect()
+		public function AudioPlugin()
 		{
-			if (getQualifiedClassName(this) == "audiomixer.core::Effect") {
+			if (getQualifiedClassName(this) == "audiomixer.core::Plugin") {
 				throw new AbstractClassError();
 			}
 		}

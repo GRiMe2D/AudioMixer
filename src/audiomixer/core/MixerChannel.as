@@ -91,7 +91,7 @@ package audiomixer.core
 			return m_postVolume;
 		}
 		
-		public function addPlugin(plugin:Effect):int {
+		public function addPlugin(plugin:AudioPlugin):int {
 			m_plugins_names.push(plugin.name);
 			return m_plugins.push(plugin as IAudioInput) - 1;
 		}
