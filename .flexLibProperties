@@ -16,6 +16,8 @@
     <classEntry path="audiomixer.utils.db2amp"/>
     <classEntry path="audiomixer.utils.amp2db"/>
     <classEntry path="audiomixer.core.SignalVolume"/>
+    <classEntry path="audiomixer.core.IAudioOutput"/>
+    <classEntry path="audiomixer.utils.mergeAudioPackets"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

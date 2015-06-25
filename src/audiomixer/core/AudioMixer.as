@@ -4,13 +4,15 @@ package audiomixer.core
 	import flash.media.Sound;
 	import flash.utils.ByteArray;
 	import flash.utils.Timer;
+	
+	import audiomixer.utils.mergeAudioPackets;
 
 	public class AudioMixer implements IAudioInput
 	{
 		
 		public static const SOUND_LOOP_NUMBER:int = 4096;
 		
-		private var slots:Vector.<MixerChannel>;
+		private var m_channels:Vector.<MixerChannel>;
 		private var bytes:ByteArray;
 		private var timer:Timer;
 		private var m_master:MixerChannel;
@@ -20,10 +22,9 @@ package audiomixer.core
 		{
 			var i:int;
 			
-			slots = new Vector.<MixerChannel>;
+			m_channels = new Vector.<MixerChannel>;
 			
 			m_master = new MixerChannel();
-			m_master.nextslot = this;
 			
 			m_master.preVolume.db = 0;
 			m_master.postVolume.db = -6;
@@ -47,37 +48,30 @@ package audiomixer.core
 		}
 		
 		public function add(mixerSlot:MixerChannel):int {
-			if (!mixerSlot.nextslot) {
-				mixerSlot.nextslot = m_master;
-			}
-			return slots.push(mixerSlot) - 1;
+			return m_channels.push(mixerSlot) - 1;
 		}
 		
 		public function input(packet:AudioPacket):void {
-			var i:int; 
-			var signal:AudioSignal;
 			
-			
-			bytes.position = 0;
-			for (i = 0; i < AudioMixer.SOUND_LOOP_NUMBER; i++) {
-				signal = packet.get(i);
-				bytes.writeFloat(signal.l);
-				bytes.writeFloat(signal.r);
-			}
 		}
 		
 		private function onSampleData(e:SampleDataEvent):void {
-			var slot:MixerChannel;
+			var channel:MixerChannel;
 			var i:int;
+			var packets:Vector.<AudioPacket> = new Vector.<AudioPacket>;
+			var packet:AudioPacket;
+			var signal:AudioSignal;
 			
-			for each (slot in slots) {
-				slot.input(new AudioPacket());
+			for each (channel in m_channels) {
+				channel.input(new AudioPacket());
+				packets.push(channel.output());
 			}
 			
-			bytes.position = 0;
+			packet = mergeAudioPackets(packets);
 			for (i = 0; i < AudioMixer.SOUND_LOOP_NUMBER; i++) {
-				e.data.writeFloat(bytes.readFloat());
-				e.data.writeFloat(bytes.readFloat());
+				signal = packet.get(i);
+				e.data.writeFloat(signal.l);
+				e.data.writeFloat(signal.r);
 			}
 			
 			

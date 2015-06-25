@@ -1,34 +1,53 @@
 package audiomixer.core
 {
+	import audiomixer.utils.mergeAudioPackets;
 
-	public class MixerChannel implements IAudioInput
+	public class MixerChannel implements IAudioInput, IAudioOutput
 	{
 		
-		protected var m_nextslot:IAudioInput;
-		protected var m_effects:Vector.<IAudioInput>;
+		protected var m_plugins_names:Vector.<String>;
+		protected var m_plugins:Vector.<IAudioInput>;
 		protected var m_preVolume:SignalVolume;
 		protected var m_postVolume:SignalVolume;
+		protected var m_audiopackets:Vector.<AudioPacket>;
+		protected var m_channels:Vector.<MixerChannel>;
+		
 		
 		public function MixerChannel()
 		{
-			m_effects = new Vector.<IAudioInput>;
+			
+			m_channels = new Vector.<MixerChannel>;
+			m_audiopackets = new Vector.<AudioPacket>;
+			m_plugins = new Vector.<IAudioInput>;
+			m_plugins_names = new Vector.<String>;
 			
 			m_preVolume = new SignalVolume();
 			m_postVolume = new SignalVolume();
 		}
 		
-		public function set nextslot(to:IAudioInput):void {
-			m_nextslot = to;
-		}
-		
-		public function get nextslot():IAudioInput {
-			return m_nextslot;
-		}
-		
 		public function input(packet:AudioPacket):void
 		{
+			
+			m_audiopackets.push(packet);
+			
+			
+		}
+		
+		public function output():AudioPacket {
+			var channel:MixerChannel;
+			var packet:AudioPacket;
+			
+			for each (channel in m_channels) {
+				packet = channel.output();
+				m_audiopackets.push(packet);
+			}
+			
+			packet = mergeAudioPackets(m_audiopackets);
+			m_audiopackets.splice(0, m_audiopackets.length);
+			
 			workOn(packet);
-			out(packet);
+			
+			return packet;
 		}
 		
 		protected function workOn(packet:AudioPacket):void {
@@ -44,7 +63,7 @@ package audiomixer.core
 			}
 			
 			
-			for each (effect in m_effects) {
+			for each (effect in m_plugins) {
 				effect.input(packet);
 			}
 			
@@ -53,12 +72,6 @@ package audiomixer.core
 				signal = packet.get(i);
 				signal.l *= m_postVolume.amp;
 				signal.r *= m_postVolume.amp;
-			}
-		}
-		
-		protected function out(packet:AudioPacket):void {
-			if (m_nextslot) {
-				m_nextslot.input(packet);
 			}
 		}
 		
@@ -76,6 +89,11 @@ package audiomixer.core
 		
 		public function get postVolume():SignalVolume {
 			return m_postVolume;
+		}
+		
+		public function addPlugin(plugin:Effect):int {
+			m_plugins_names.push(plugin.name);
+			return m_plugins.push(plugin as IAudioInput) - 1;
 		}
 	}
 }

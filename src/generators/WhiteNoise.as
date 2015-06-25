@@ -3,11 +3,13 @@ package generators
 	import audiomixer.core.AudioMixer;
 	import audiomixer.core.AudioPacket;
 	import audiomixer.core.AudioSignal;
-	import audiomixer.core.SignalVolume;
 	import audiomixer.core.Effect;
+	import audiomixer.core.SignalVolume;
 	
 	public class WhiteNoise extends Effect
 	{
+		
+		private static const NAME:String = "White Noise Generator";
 		
 		private var m_volume:SignalVolume;
 		
@@ -43,6 +45,10 @@ package generators
 				
 				
 			}
+		}
+		
+		override public function get name():String {
+			return NAME;
 		}
 	}
 }

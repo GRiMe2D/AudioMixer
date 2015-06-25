@@ -7,6 +7,7 @@ package audiomixer.core
 
 	public class Effect implements IAudioInput
 	{
+		
 		public function Effect()
 		{
 			if (getQualifiedClassName(this) == "audiomixer.core::Effect") {
@@ -15,6 +16,10 @@ package audiomixer.core
 		}
 		
 		public function input(packet:AudioPacket):void {
+			throw new AbstractMethodError();
+		}
+		
+		public function get name():String {
 			throw new AbstractMethodError();
 		}
 	}
