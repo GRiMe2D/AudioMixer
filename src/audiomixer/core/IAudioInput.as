@@ -2,6 +2,6 @@ package audiomixer.core
 {
 	public interface IAudioInput
 	{
-		function input(signal:AudioSignal):void;
+		function input(packet:AudioPacket):void;
 	}
 }

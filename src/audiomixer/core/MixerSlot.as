@@ -20,19 +20,19 @@ package audiomixer.core
 			return m_nextslot;
 		}
 		
-		public function input(signal:AudioSignal):void
+		public function input(packet:AudioPacket):void
 		{
-			workOn(signal);
-			out(signal);
+			workOn(packet);
+			out(packet);
 		}
 		
-		protected function workOn(signal:AudioSignal):void {
+		protected function workOn(packet:AudioPacket):void {
 			
 		}
 		
-		protected function out(signal:AudioSignal):void {
+		protected function out(packet:AudioPacket):void {
 			if (m_nextslot) {
-				m_nextslot.input(signal);
+				m_nextslot.input(packet);
 			}
 		}
 	}
