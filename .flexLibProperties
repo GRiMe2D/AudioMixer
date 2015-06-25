@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
-  <includeClasses/>
+  <includeClasses>
+    <classEntry path="audiomixer.core.AudioMixer"/>
+    <classEntry path="audiomixer.core.IAudioInput"/>
+    <classEntry path="audiomixer.core.AudioSignal"/>
+    <classEntry path="audiomixer.utils.rad2deg"/>
+    <classEntry path="audiomixer.utils.deg2rad"/>
+    <classEntry path="audiomixer.core.MixerSlot"/>
+  </includeClasses>
   <includeResources/>
   <namespaceManifests/>
 </flexLibProperties>
